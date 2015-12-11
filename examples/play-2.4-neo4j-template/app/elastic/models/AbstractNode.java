@@ -1,4 +1,4 @@
-package neo4j.models;
+package elastic.models;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;

@@ -1,4 +1,4 @@
-package neo4j.services;
+package elastic.services;
 
 import neo4j.models.World;
 import neo4j.repositories.WorldRepository;

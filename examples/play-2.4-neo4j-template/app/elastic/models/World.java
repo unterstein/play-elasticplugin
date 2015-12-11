@@ -1,4 +1,4 @@
-package neo4j.models;
+package elastic.models;
 
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.RelationshipType;

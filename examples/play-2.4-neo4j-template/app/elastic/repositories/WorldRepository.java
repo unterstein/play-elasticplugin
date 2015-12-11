@@ -1,4 +1,4 @@
-package neo4j.repositories;
+package elastic.repositories;
 
 import neo4j.models.World;
 import org.springframework.data.neo4j.repository.GraphRepository;
