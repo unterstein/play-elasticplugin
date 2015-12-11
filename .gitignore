@@ -1,0 +1,11 @@
+target/
+.idea/
+.idea_modules/
+.settings/
+*.iml
+user.sbt
+atlassian-ide-plugin.xml
+examples/*/activator*
+examples/*/target
+examples/*/logs
+
