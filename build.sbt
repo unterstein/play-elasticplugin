@@ -1,14 +1,13 @@
-name := "play-neo4jplugin"
+name := "play-elasticplugin"
 
-version := "1.5.1-SNAPSHOT"
+version := "0.1.0-SNAPSHOT"
 
-organization := "com.github.tuxBurner"
+organization := "com.github.unterstein"
 
 resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/",
   "Spring releases" at "http://repo.springsource.org/release",
-  "Spring milestones" at "http://repo.spring.io/milestone",
-  "Neo4j" at "http://m2.neo4j.org/content/repositories/releases/"
+  "Spring milestones" at "http://repo.spring.io/milestone"
 
 // This line below can cause "uri has authority component" errors.   
 //"Local Maven" at "file://" + Path.userHome.absolutePath + "/.m2/repository"
@@ -18,20 +17,21 @@ resolvers ++= Seq(
 scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play" % "2.4.2",
-  "com.typesafe.play" %% "play-java" % "2.4.2",
-  "com.sun.jersey" % "jersey-core" % "1.19",
+  "com.typesafe.play" %% "play" % "2.4.4",
+  "com.typesafe.play" %% "play-java" % "2.4.4",
+
   // spring data stuff
-  "org.springframework" % "spring-context" % "4.1.6.RELEASE",
-  "org.springframework.data" % "spring-data-neo4j" % "3.4.0.RELEASE",
-  "org.springframework.data" % "spring-data-neo4j-rest" % "3.4.0.RELEASE",
-  // neo4j stuff
-  "org.neo4j" % "neo4j" % "2.3.0-M02",
+  "org.springframework" % "spring-context" % "4.1.8.RELEASE",
+  "org.springframework.data" % "spring-data-elasticsearch" % "1.3.1.RELEASE",
+
+  // elastic stuff
+  "org.elasticsearch" % "elasticsearch" % "2.1.0",
+
   // Inject stuff
   "javax.inject" % "javax.inject" % "1"
 )
 
 publishTo <<= version {
   case v if v.trim.endsWith("SNAPSHOT") => Some(Resolver.file("file",  new File(Path.userHome.absolutePath+"/.m2/repository")))
-  case _ => Some(Resolver.file("Github Pages",  new File("../tuxBurner.github.io/repo")))
+  case _ => Some(Resolver.file("Github Pages",  new File("../unterstein.github.io/repo")))
 }
