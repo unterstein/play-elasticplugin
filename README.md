@@ -43,9 +43,8 @@ elastic.embeddedTarget="target/elastic" # where to put the embedded target
 
 # remote elastic config
 ```
-elastic.rest.host="http://localhost:7474/db/data"
-elastic.rest.user=""
-elastic.rest.password=""
+elastic.remote.host="localhost"
+elastic.remote.port=9300
 ```
 
 ## Usage
