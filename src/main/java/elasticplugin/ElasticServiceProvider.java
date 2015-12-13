@@ -8,12 +8,12 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
  * stuff.
  *
  * <code>
- * @Component
+ * \@Component
  *  public class ElasticServiceProviderImpl extends ElasticServiceProvider
  *  {
  *
  *
- *    @Autowired
+ *    \@Autowired
  *    public GalaxyService galaxyService;
  *
  *    public static ElasticServiceProviderImpl get() {
