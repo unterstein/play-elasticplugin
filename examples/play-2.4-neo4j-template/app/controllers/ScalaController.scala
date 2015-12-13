@@ -1,26 +1,22 @@
 package controllers
 
+import elastic.models.World
+import elastic.services.{ElasticServiceProviderImpl, GalaxyService}
 import play.api.mvc._
-import neo4j.models.World
-import neo4j.services.{Neo4jServiceProviderImpl, GalaxyService}
 
 class ScalaController extends Controller {
 
 
+  def index = Action {
+    def galaxyService: GalaxyService = ElasticServiceProviderImpl.get().galaxyService
 
-  def index = Neo4jTransactionAction {
-    def galaxyService: GalaxyService = Neo4jServiceProviderImpl.get().galaxyService;
-
-    if (galaxyService.getNumberOfWorlds() == 0) {
+    if (galaxyService.getNumberOfWorlds == 0) {
       galaxyService.makeSomeWorldsAndRelations()
     }
 
-    def allWorlds: java.util.List[World] = galaxyService.getAllWorlds()
-    def first: World = allWorlds.get(0)
-    def last: World = allWorlds.get(allWorlds.size() - 1)
-    def pathFromFirstToLast: java.util.List[World] = galaxyService.getWorldPath(first, last)
+    def allWorlds: java.util.List[World] = galaxyService.getAllWorlds
 
-    Ok(views.html.index.render(allWorlds, pathFromFirstToLast))
+    Ok(views.html.index.render(allWorlds))
   }
 
 }

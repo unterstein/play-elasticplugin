@@ -1,11 +1,11 @@
-@(worlds: java.util.List[neo4j.models.World], path: java.util.List[neo4j.models.World])
+@(worlds: java.util.List[elastic.models.World])
 
-@main(title = "PlayFramework SpringData Neo4j Plugin by @SebasthSeppel") {
+@main(title = "PlayFramework SpringData Elasticsesarch Plugin by @SebasthSeppel &amp; @unterstein") {
 
     <div class="container">
         <div class="content">
             <div class="page-header">
-                <h2>PlayFramework and Spring Data Neo4j</h2>
+                <h2>PlayFramework and Spring Data Elasticsearch</h2>
             </div>
             <div class="row">
                 <div>
@@ -17,7 +17,6 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th>Reachable by rocket</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,18 +25,11 @@
                                     <td>@world.id</td>
                                     <td>@world.name</td>
                                     <td>@world.moons</td>
-                                    <td>@for(otherWorld <- world.reachableByRocket) {
-                                        @otherWorld.name }</td>
                                 </tr>
                             }
                             </tbody>
                         </table>
                         <legend>And the path from @worlds.get(0).name to @worlds.get(worlds.size -1).name</legend>
-                        <ul class="breadcrumb">
-                        @for(pathWorld <- path) {
-                            <li><a href="#">@pathWorld.name</a> </li>
-                        }
-                        </ul>
                     </fieldset>
                 </div>
             </div>

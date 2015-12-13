@@ -2,19 +2,16 @@ package elastic.models;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.annotation.Id;
+
 
 /**
  * @author Sebastian Hardt (s.hardt@micromata.de)
- *         Date: 27.08.15
- *         Time: 21:38
+ * @author Johannes Unterstein(unterstein@me.com)
  */
-
-@NodeEntity
 public class AbstractNode {
 
-  @GraphId
+  @Id
   public Long id;
 
   @CreatedDate

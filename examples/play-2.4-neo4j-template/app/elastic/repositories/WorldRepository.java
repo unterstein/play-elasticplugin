@@ -1,13 +1,12 @@
 package elastic.repositories;
 
-import neo4j.models.World;
-import org.springframework.data.neo4j.repository.GraphRepository;
+import elastic.models.World;
+import org.springframework.data.elasticsearch.repository.ElasticsearchCrudRepository;
 
 /**
  * @author Sebastian Hardt (sebasth@gmx.de)
- *         Date: 27.08.15
- *         Time: 21:44
+ * @author Johannes Unterstein (unterstein@me.com)
  */
-public interface WorldRepository extends GraphRepository<World>
-{
+public interface WorldRepository extends ElasticsearchCrudRepository<World, Long> {
+
 }

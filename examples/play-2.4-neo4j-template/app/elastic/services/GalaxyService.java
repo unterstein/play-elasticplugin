@@ -1,20 +1,12 @@
 package elastic.services;
 
-import neo4j.models.World;
-import neo4j.repositories.WorldRepository;
-import org.neo4j.graphalgo.GraphAlgoFactory;
-import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Path;
-import org.neo4j.helpers.collection.IteratorUtil;
-import org.neo4j.kernel.Traversal;
+import elastic.models.World;
+import elastic.repositories.WorldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import play.Logger;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,16 +15,21 @@ import java.util.List;
  *         Time: 21:34
  */
 @Service
-public class GalaxyService
-{
+public class GalaxyService {
+
   @Autowired
   private WorldRepository worldRepository;
 
   public long getNumberOfWorlds() {
     return worldRepository.count();
   }
+
   public List<World> getAllWorlds() {
-    return new ArrayList<World>(IteratorUtil.asCollection(worldRepository.findAll()));
+    List<World> result = new ArrayList<World>();
+    for (World world : worldRepository.findAll()) {
+      result.add(world);
+    }
+    return result;
   }
 
   public List<World> makeSomeWorldsAndRelations() {
@@ -59,33 +56,9 @@ public class GalaxyService
     worlds.add(createWorld("Hel", 62));
 
 
-    // Add relations
-    for (int i = 0; i < worlds.size() - 1; i++) {
-      World world = worlds.get(i);
-      world.addRocketRouteTo(worlds.get(i + 1));
-      worldRepository.save(world);
-    }
-
     Logger.debug("Creating test data done, have fun with it :).");
 
     return worlds;
-  }
-
-  public List<World> getWorldPath(final World worldA, final World worldB) {
-    Path path = GraphAlgoFactory.shortestPath(Traversal.expanderForTypes(World.RelTypes.REACHABLE_BY_ROCKET, Direction.OUTGOING).add(World.RelTypes.REACHABLE_BY_ROCKET), 100)
-        .findSinglePath(Neo4jServiceProviderImpl.get().template.getNode(worldA.id), Neo4jServiceProviderImpl.get().template.getNode(worldB.id));
-    if (path == null) {
-      return Collections.emptyList();
-    }
-    return convertNodesToWorlds(path);
-  }
-
-  private List<World> convertNodesToWorlds(final Path list) {
-    final List<World> result = new LinkedList<World>();
-    for (Node node : list.nodes()) {
-      result.add(Neo4jServiceProviderImpl.get().template.load(node, World.class));
-    }
-    return result;
   }
 
   private World createWorld(String name, int moons) {
