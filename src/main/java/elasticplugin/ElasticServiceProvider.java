@@ -1,4 +1,4 @@
-package neo4jplugin;
+package elasticplugin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;

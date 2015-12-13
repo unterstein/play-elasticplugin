@@ -1,4 +1,4 @@
-package neo4jplugin.configuration;
+package elasticplugin.configuration;
 
 import org.elasticsearch.client.Client;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

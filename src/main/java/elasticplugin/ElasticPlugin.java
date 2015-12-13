@@ -1,10 +1,10 @@
-package neo4jplugin;
+package elasticplugin;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.typesafe.config.ConfigFactory;
-import neo4jplugin.configuration.EmbeddedElasticConfig;
-import neo4jplugin.configuration.RemoteElasticConfiguration;
+import elasticplugin.configuration.EmbeddedElasticConfig;
+import elasticplugin.configuration.RemoteElasticConfiguration;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;

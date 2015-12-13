@@ -1,10 +1,10 @@
-package neo4jplugin.configuration;
+package elasticplugin.configuration;
 
-
+import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.node.Node;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,42 +13,42 @@ import org.springframework.data.elasticsearch.repository.cdi.ElasticsearchReposi
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
- * Configuration which is used to connect to embedded database.
+ * Configuration which is used to connect via rest to the database.
  */
 @EnableTransactionManagement
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "elastic.repositories", repositoryFactoryBeanClass = ElasticsearchRepositoryBean.class)
 @ComponentScan("elastic")
-public class EmbeddedElasticConfig extends ElasticBaseConfiguration {
+public class RemoteElasticConfiguration extends ElasticBaseConfiguration {
 
-  private static Settings elasticsearchSettings = Settings.settingsBuilder()
-      .put("path.data", ConfigFactory.load().getString("elastic.embeddedTarget"))
-      .put("http.port", 8200)  // TODO JU configurable
-      .build();
-
-  private static Node node = nodeBuilder().local(true).settings(elasticsearchSettings).node();
-
-  private static Client client = node.client();
+  private Client remoteClient;
 
   @Bean
   @Override
   public ElasticsearchTemplate elasticsearchTemplate() {
-    return new ElasticsearchTemplate(client);
+    try {
+      Config config = ConfigFactory.load();
+      remoteClient = TransportClient.builder().build()
+          .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(config.getString("elastic.remote.host")), config.getInt("elastic.remote.port")));
+    } catch (UnknownHostException o_O) {
+      // TODO JU
+      o_O.printStackTrace();
+    }
+    return new ElasticsearchTemplate(remoteClient);
   }
 
   @Bean
   @Override
   public Client client() {
-    return client;
+    return remoteClient;
   }
 
   @Override
   public void shutDown() {
-    node.close();
-    client.close();
+    remoteClient.close();
   }
 }
-

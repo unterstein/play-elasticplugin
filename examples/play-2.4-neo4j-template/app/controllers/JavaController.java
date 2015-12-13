@@ -4,8 +4,8 @@ import com.google.inject.Inject;
 import neo4j.models.World;
 import neo4j.services.GalaxyService;
 import neo4j.services.Neo4jServiceProviderImpl;
-import neo4jplugin.ElasticPlugin;
-import neo4jplugin.Neo4jTransactional;
+import elasticplugin.ElasticPlugin;
+import elasticplugin.Neo4jTransactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 
