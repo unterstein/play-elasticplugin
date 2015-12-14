@@ -26,7 +26,7 @@ public class ElasticPlugin {
 
   public static Logger.ALogger LOGGER = Logger.of(ElasticPlugin.class);
 
-  private static ThreadLocal<ElasticServiceProvider> neo4jProvider = new ThreadLocal<>();
+  private static ThreadLocal<ElasticServiceProvider> elasticProvider = new ThreadLocal<>();
 
 
   private static AnnotationConfigApplicationContext springContext = null;
@@ -62,8 +62,8 @@ public class ElasticPlugin {
    * @return the configured implementation of the ServiceProvider.
    */
   public static <E extends ElasticServiceProvider> E get() {
-    neo4jProvider.set((ElasticServiceProvider) springContext.getBean(serviceProviderClass));
-    return (E) neo4jProvider.get();
+    elasticProvider.set((ElasticServiceProvider) springContext.getBean(serviceProviderClass));
+    return (E) elasticProvider.get();
   }
 
 
