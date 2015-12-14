@@ -4,6 +4,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -32,7 +33,7 @@ public class RemoteElasticConfiguration extends ElasticBaseConfiguration {
   public ElasticsearchTemplate elasticsearchTemplate() {
     try {
       Config config = ConfigFactory.load();
-      remoteClient = TransportClient.builder().build()
+      remoteClient = new TransportClient(ImmutableSettings.settingsBuilder().build())
           .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(config.getString("elastic.remote.host")), config.getInt("elastic.remote.port")));
     } catch (UnknownHostException o_O) {
       // TODO JU

@@ -25,7 +25,8 @@ libraryDependencies ++= Seq(
   "org.springframework.data" % "spring-data-elasticsearch" % "1.3.1.RELEASE",
 
   // elastic stuff
-  "org.elasticsearch" % "elasticsearch" % "2.1.0",
+  // "org.elasticsearch" % "elasticsearch" % "2.1.0", // TODO UPGRADE !
+  "org.elasticsearch" % "elasticsearch" % "1.7.3",
 
   // Inject stuff
   "javax.inject" % "javax.inject" % "1"
