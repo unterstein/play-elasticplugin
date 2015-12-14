@@ -21,7 +21,7 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-java" % "2.4.4",
 
   // spring data stuff
-  "org.springframework" % "spring-context" % "4.1.8.RELEASE",
+//  "org.springframework" % "spring-context" % "4.1.8.RELEASE",
   "org.springframework.data" % "spring-data-elasticsearch" % "1.3.1.RELEASE",
 
   // elastic stuff
