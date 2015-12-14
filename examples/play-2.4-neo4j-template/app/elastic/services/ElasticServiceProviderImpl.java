@@ -1,5 +1,6 @@
 package elastic.services;
 
+import elastic.repositories.WorldRepository;
 import elasticplugin.ElasticPlugin;
 import elasticplugin.ElasticServiceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class ElasticServiceProviderImpl extends ElasticServiceProvider {
 
   @Autowired
-  public GalaxyService galaxyService;
+  public WorldRepository worldRepository;
 
   public static ElasticServiceProviderImpl get() {
     return ElasticPlugin.get();

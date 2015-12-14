@@ -1,38 +1,18 @@
 package elastic.services;
 
 import elastic.models.World;
-import elastic.repositories.WorldRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import play.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Sebastian Hardt (s.hardt@micromata.de)
- *         Date: 27.08.15
- *         Time: 21:34
+ * @author Sebastian Hardt (sebasth@gmx.de)
+ * @author Johannes Unterstein (unterstein@me.com)
  */
-@Service
-public class GalaxyService {
+public class InitialDataHelper {
 
-  @Autowired
-  private WorldRepository worldRepository;
-
-  public long getNumberOfWorlds() {
-    return worldRepository.count();
-  }
-
-  public List<World> getAllWorlds() {
-    List<World> result = new ArrayList<World>();
-    for (World world : worldRepository.findAll()) {
-      result.add(world);
-    }
-    return result;
-  }
-
-  public List<World> makeSomeWorldsAndRelations() {
+  public static List<World> makeSomeWorldsAndRelations() {
 
     Logger.debug("Creating test data set in database.");
 
@@ -61,7 +41,7 @@ public class GalaxyService {
     return worlds;
   }
 
-  private World createWorld(String name, int moons) {
-    return worldRepository.save(new World(name, moons));
+  private static World createWorld(String name, int moons) {
+    return ElasticServiceProviderImpl.get().worldRepository.save(new World(name, moons));
   }
 }

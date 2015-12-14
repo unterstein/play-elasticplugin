@@ -1,9 +1,11 @@
 package controllers;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import elastic.models.World;
+import elastic.repositories.WorldRepository;
 import elastic.services.ElasticServiceProviderImpl;
-import elastic.services.GalaxyService;
+import elastic.services.InitialDataHelper;
 import elasticplugin.ElasticPlugin;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -21,13 +23,13 @@ public class JavaController extends Controller {
 
   public Result index() {
 
-    final GalaxyService galaxyService = ElasticServiceProviderImpl.get().galaxyService;
+    final WorldRepository worldRepository = ElasticServiceProviderImpl.get().worldRepository;
 
-    if (galaxyService.getNumberOfWorlds() == 0) {
-      galaxyService.makeSomeWorldsAndRelations();
+    if (worldRepository.count() == 0) {
+      InitialDataHelper.makeSomeWorldsAndRelations();
     }
 
-    final List<World> allWorlds = galaxyService.getAllWorlds();
+    final List<World> allWorlds = Lists.newArrayList(worldRepository.findAll().iterator());
     return ok(views.html.index.render(allWorlds));
   }
 
