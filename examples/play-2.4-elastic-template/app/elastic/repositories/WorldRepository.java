@@ -1,12 +1,12 @@
 package elastic.repositories;
 
 import elastic.models.World;
-import org.springframework.data.elasticsearch.repository.ElasticsearchCrudRepository;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
  * @author Sebastian Hardt (sebasth@gmx.de)
  * @author Johannes Unterstein (unterstein@me.com)
  */
-public interface WorldRepository extends ElasticsearchCrudRepository<World, Long> {
+public interface WorldRepository extends ElasticsearchRepository<World, Long> {
 
 }
