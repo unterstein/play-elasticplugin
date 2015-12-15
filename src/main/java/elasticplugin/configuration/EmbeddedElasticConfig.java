@@ -33,7 +33,7 @@ public class EmbeddedElasticConfig extends ElasticBaseConfiguration {
 
   @Bean
   @Override
-  public ElasticsearchTemplate elasticsearchTemplate() {
+  public ElasticsearchTemplate elasticsearchTemplate() throws Exception {
     return new ElasticsearchTemplate(client);
   }
 
@@ -44,9 +44,10 @@ public class EmbeddedElasticConfig extends ElasticBaseConfiguration {
   }
 
   @Override
-  public void shutDown() {
+  public void destroy() throws Exception {
     node.close();
     client.close();
   }
+
 }
 

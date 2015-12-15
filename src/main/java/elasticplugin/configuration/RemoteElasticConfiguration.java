@@ -12,44 +12,37 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.cdi.ElasticsearchRepositoryBean;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  * Configuration which is used to connect via rest to the database.
  */
-@EnableTransactionManagement
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "elastic.repositories", repositoryFactoryBeanClass = ElasticsearchRepositoryBean.class)
 @ComponentScan("elastic")
 public class RemoteElasticConfiguration extends ElasticBaseConfiguration {
 
-  private Client remoteClient;
+  private Client client;
 
   @Bean
   @Override
-  public ElasticsearchTemplate elasticsearchTemplate() {
-    try {
-      Config config = ConfigFactory.load();
-      remoteClient = new TransportClient(ImmutableSettings.settingsBuilder().build())
-          .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(config.getString("elastic.remote.host")), config.getInt("elastic.remote.port")));
-    } catch (UnknownHostException o_O) {
-      // TODO JU
-      o_O.printStackTrace();
-    }
-    return new ElasticsearchTemplate(remoteClient);
+  public ElasticsearchTemplate elasticsearchTemplate() throws Exception {
+    Config config = ConfigFactory.load();
+    client = new TransportClient(ImmutableSettings.settingsBuilder().build())
+        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(config.getString("elastic.remote.host")), config.getInt("elastic.remote.port")));
+    return new ElasticsearchTemplate(client);
   }
 
   @Bean
   @Override
   public Client client() {
-    return remoteClient;
+    return client;
   }
 
   @Override
-  public void shutDown() {
-    remoteClient.close();
+  public void destroy() throws Exception {
+    client.close();
   }
+
 }
