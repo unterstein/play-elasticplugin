@@ -17,7 +17,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
  *    public GalaxyService galaxyService;
  *
  *    public static ElasticServiceProviderImpl get() {
- *      return Neo4jPlugin.get();
+ *      return ElasticPlugin.get();
  *     }
  *   }
  * </code>

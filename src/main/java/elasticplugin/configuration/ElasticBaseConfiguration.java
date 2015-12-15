@@ -5,7 +5,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 
 /**
- * This is the base configuration for the Neo4j Plugin.
+ * This is the base configuration for the Elastic Plugin.
  *
  * @author Sebastian Hardt (sebasth@gmx.de)
  * @author Johannes Unterstein (unterstein@me.com)
