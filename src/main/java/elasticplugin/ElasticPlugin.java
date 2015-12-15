@@ -6,6 +6,7 @@ import com.typesafe.config.ConfigFactory;
 import elasticplugin.configuration.EmbeddedElasticConfig;
 import elasticplugin.configuration.RemoteElasticConfiguration;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 import play.Logger;
@@ -28,19 +29,16 @@ public class ElasticPlugin {
 
   private static ThreadLocal<ElasticServiceProvider> elasticProvider = new ThreadLocal<>();
 
-
   private static AnnotationConfigApplicationContext springContext = null;
 
   private final static String SERVICE_PROVIDER_NAME_CFG = "elastic.serviceProviderClass";
 
   private static Class<?> serviceProviderClass = null;
 
-
   @Inject
   public ElasticPlugin(ApplicationLifecycle applicationLifecycle) {
 
     initialize();
-
 
     applicationLifecycle.addStopHook(() -> {
 
