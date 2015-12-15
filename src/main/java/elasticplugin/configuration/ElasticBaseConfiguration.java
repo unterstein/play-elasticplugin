@@ -17,5 +17,9 @@ public abstract class ElasticBaseConfiguration extends AnnotationConfigApplicati
   public abstract void shutDown();
 
   public abstract ElasticsearchTemplate elasticsearchTemplate();
+
+  public ElasticBaseConfiguration() {
+    super("elastic");
+  }
 }
 
