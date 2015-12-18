@@ -6,10 +6,8 @@ import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.repository.cdi.ElasticsearchRepositoryBean;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
@@ -18,8 +16,7 @@ import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
  * Configuration which is used to connect to embedded database.
  */
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "elastic.repositories", repositoryFactoryBeanClass = ElasticsearchRepositoryBean.class)
-@ComponentScan("elastic")
+@EnableElasticsearchRepositories(basePackages = "elastic.repositories")
 public class EmbeddedElasticConfig extends ElasticBaseConfiguration {
 
   private static Settings elasticsearchSettings = ImmutableSettings.settingsBuilder()

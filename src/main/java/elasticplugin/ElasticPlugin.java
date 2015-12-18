@@ -28,7 +28,7 @@ public class ElasticPlugin {
 
   private static ThreadLocal<ElasticServiceProvider> elasticProvider = new ThreadLocal<>();
 
-  private static AnnotationConfigApplicationContext springContext = null;
+  private static AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext();
 
   private final static String SERVICE_PROVIDER_NAME_CFG = "elastic.serviceProviderClass";
 
@@ -101,14 +101,14 @@ public class ElasticPlugin {
       if (LOGGER.isDebugEnabled() == true) {
         LOGGER.debug("Loading embedded configuration");
       }
-      springContext = new AnnotationConfigApplicationContext(EmbeddedElasticConfig.class);
+      springContext.register(EmbeddedElasticConfig.class);
     }
 
     if (mode.equals("remote")) {
       if (LOGGER.isDebugEnabled() == true) {
         LOGGER.debug("Loading remote configuration");
       }
-      springContext = new AnnotationConfigApplicationContext(RemoteElasticConfiguration.class);
+      springContext.register(RemoteElasticConfiguration.class);
     }
 
 
@@ -118,8 +118,9 @@ public class ElasticPlugin {
       }
     }
 
+    springContext.scan("elastic", "elastic.repositories");
+    springContext.refresh();
     springContext.start();
-    //springContext.scan();
     springContext.getAutowireCapableBeanFactory().autowireBean(serviceProviderClass);
     springContext.registerShutdownHook();
   }

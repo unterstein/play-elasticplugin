@@ -12,7 +12,7 @@ import org.springframework.data.annotation.Id;
 public class AbstractNode {
 
   @Id
-  public Long id;
+  public String id;
 
   @CreatedDate
   public Long createdDate;

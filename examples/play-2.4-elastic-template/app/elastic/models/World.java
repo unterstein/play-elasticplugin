@@ -7,7 +7,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
  *         Date: 27.08.15
  *         Time: 21:39
  */
-@Document(indexName = "World")
+@Document(indexName = "world")
 public class World extends AbstractNode
 {
 
