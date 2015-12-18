@@ -28,7 +28,7 @@ public class ElasticPlugin {
 
   private static ThreadLocal<ElasticServiceProvider> elasticProvider = new ThreadLocal<>();
 
-  private static AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext();
+  private static AnnotationConfigApplicationContext springContext = null;
 
   private final static String SERVICE_PROVIDER_NAME_CFG = "elastic.serviceProviderClass";
 
@@ -68,6 +68,8 @@ public class ElasticPlugin {
    * This does the initialization of the plugin by wiring up the springcontext according to the configuration settings.
    */
   private void initialize() {
+
+    springContext = new AnnotationConfigApplicationContext();
 
     String serviceProviderClassName = ConfigFactory.load().getString(SERVICE_PROVIDER_NAME_CFG);
     if (StringUtils.isEmpty(serviceProviderClassName) == true) {
