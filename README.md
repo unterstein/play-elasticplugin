@@ -4,6 +4,8 @@ This is a simple Play 2 plugin, for Elasticsearch.
 
 I got the idea from https://github.com/tuxBurner/play-neo4jplugin ! THANKS A LOT Seppel (@tuxBurner) for your awesome plugin and skeleteon !
 
+You can use Play 2.4 with spring-data-elasticsearch without this plugin, see my example: https://github.com/unterstein/play-spring-data-elasticsearch-example
+
 What i didn't liked that i can't call elasticsearch in the static way, like Ebean etc...
 
 So here we go, i created this plugin :)
