@@ -7,7 +7,6 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.cdi.ElasticsearchRepositoryBean;
@@ -20,17 +19,26 @@ import java.net.InetAddress;
  */
 @Configuration
 @EnableElasticsearchRepositories(basePackages = "elastic.repositories", repositoryFactoryBeanClass = ElasticsearchRepositoryBean.class)
-@ComponentScan("elastic")
 public class RemoteElasticConfiguration extends ElasticBaseConfiguration {
 
-  private Client client;
+  private static TransportClient client;
+
+  {
+    Config config = ConfigFactory.load();
+    ImmutableSettings.Builder builder = ImmutableSettings.settingsBuilder();
+    builder = addStringIfPresent(builder, config, "cluster.name", "elastic.clusterName");
+
+    client = new TransportClient(builder.build());
+    try {
+      client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(config.getString("elastic.remoteHost")), config.getInt("elastic.remotePort")));
+    } catch (Exception o_O) {
+      throw new RuntimeException("Spring Configuration RemoteElasticConfiguration could not be initialized", o_O);
+    }
+  }
 
   @Bean
   @Override
   public ElasticsearchTemplate elasticsearchTemplate() throws Exception {
-    Config config = ConfigFactory.load();
-    client = new TransportClient(ImmutableSettings.settingsBuilder().build())
-        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(config.getString("elastic.remote.host")), config.getInt("elastic.remote.port")));
     return new ElasticsearchTemplate(client);
   }
 
