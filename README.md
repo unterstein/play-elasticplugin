@@ -41,8 +41,10 @@ elastic.serviceProviderClass="elastic.services.ElasticServiceProvider" # the pro
 elastic.mode="embedded" # mode to run embedded or remote
 
 # embedded elastic config
+```
 elastic.embeddedTarget="target/elastic" # where to put the embedded target
 elastic.clusterName="myCluster"
+```
 
 # remote elastic config
 ```
