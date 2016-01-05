@@ -12,7 +12,7 @@ So here we go, i created this plugin :)
 
 ## Current Version
 
-**0.1.0**
+**0.2.0**
 
 * kickstart the project
 
@@ -30,7 +30,7 @@ resolvers += "Spring milestones" at "http://repo.spring.io/milestone"
 Add a dependency on the following artifact:
 
 ```scala
-libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.1.0"
+libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.2.0"
 
 
 Settings for the plugin go into the `conf/application.conf`:
@@ -90,4 +90,6 @@ Take a look into the examples
 
 ## Old Versions
 
-none
+0.2.0 Bugfix: Problems with spring-context when reloading during re-compile through play
+
+0.1.0 Initial working version
