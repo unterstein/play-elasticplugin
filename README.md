@@ -42,15 +42,20 @@ elastic.mode="embedded" # mode to run embedded or remote
 
 # embedded elastic config
 ```
+elastic.mode="embedded"
 elastic.embeddedTarget="target/elastic" # where to put the embedded target
 elastic.clusterName="myCluster"
+elastic.serviceProviderClass="elastic.services.ElasticServiceProviderImpl"
+elastic.httpPort=9200 # define port where embedded ElasticSearch can be addressed via HTTP
 ```
 
 # remote elastic config
 ```
+elastic.mode="remote"
+elastic.clusterName="myCluster"
+elastic.serviceProviderClass="elastic.services.ElasticServiceProviderImpl"
 elastic.remoteHost="localhost"
 elastic.remotePort=9300
-elastic.clusterName="myCluster"
 ```
 
 ## Usage
