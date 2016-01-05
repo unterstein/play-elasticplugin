@@ -41,9 +41,7 @@ public class ElasticPlugin {
 
     applicationLifecycle.addStopHook(() -> {
 
-      // TODO JU
-//      ElasticPlugin.get().template.getGraphDatabaseService().shutdown();
-      springContext.stop();
+      springContext.close();
 
       // TODO clean the application lifecycle here
       return F.Promise.pure(null);
