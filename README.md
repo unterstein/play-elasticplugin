@@ -58,6 +58,12 @@ elastic.remoteHost="localhost"
 elastic.remotePort=9300
 ```
 
+# own elastic config
+```
+elastic.mode="own"
+elastic.ownConfigurationClass="elastic.ExampleOwnConfiguration"
+```
+
 ## Usage
 
 All elasticsearch relevant stuff must go to `app/elastic/`

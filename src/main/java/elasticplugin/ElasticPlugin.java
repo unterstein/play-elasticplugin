@@ -76,8 +76,8 @@ public class ElasticPlugin {
       }
       return;
     }
+    final ClassLoader classLoader = Play.classloader(Play.current());
     try {
-      final ClassLoader classLoader = Play.classloader(Play.current());
       serviceProviderClass = Class.forName(serviceProviderClassName, false, classLoader);
       Annotation annotation = serviceProviderClass.getAnnotation(Component.class);
       if (annotation == null) {
@@ -109,6 +109,27 @@ public class ElasticPlugin {
         LOGGER.debug("Loading remote configuration");
       }
       springContext.register(RemoteElasticConfiguration.class);
+    }
+
+    if (mode.equals("own")) {
+      if(LOGGER.isDebugEnabled() == true) {
+        LOGGER.debug("Loading own configuration");
+      }
+      String configurationClassName = ConfigFactory.load().getString("elastic.ownConfigurationClass");
+      if (StringUtils.isEmpty(configurationClassName) == true) {
+        if (LOGGER.isErrorEnabled()) {
+          LOGGER.error("if you use elastic.mode = own, you must provide a configuration class elastic.ownConfigurationClass");
+          return;
+        }
+      }
+      try {
+        Class<?> configurationClass = Class.forName(configurationClassName, false, classLoader);
+        springContext.register(configurationClass);
+      } catch (ClassNotFoundException e) {
+        if (LOGGER.isErrorEnabled()) {
+          LOGGER.error("Error while getting elastic class for configuration: " + configurationClassName, e);
+        }
+      }
     }
 
 
