@@ -11,7 +11,7 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   specs2 % Test,
-  "com.github.unterstein" %% "play-elasticplugin" % "0.3.0-SNAPSHOT",
+  "com.github.unterstein" %% "play-elasticplugin" % "0.4.0-SNAPSHOT",
   "org.webjars" % "bootstrap" % "3.2.0"
 
 )
