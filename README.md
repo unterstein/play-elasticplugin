@@ -33,6 +33,7 @@ Add a dependency on the following artifact:
 ```scala
 libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.3.0"
 
+```
 
 Settings for the plugin go into the `conf/application.conf`:
 
@@ -40,6 +41,7 @@ Settings for the plugin go into the `conf/application.conf`:
 elastic.serviceProviderClass="elastic.services.ElasticServiceProvider" # the provider class which holds the annotated elasticsearch beans
 
 elastic.mode="embedded" # mode to run embedded or remote
+```
 
 # embedded elastic config
 ```
