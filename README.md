@@ -52,7 +52,7 @@ elastic.serviceProviderClass="elastic.services.ElasticServiceProviderImpl"
 elastic.httpPort=9200 # define port where embedded ElasticSearch can be addressed via HTTP
 ```
 
-Please not, that you need to start play with more memory, if you want to use elasticsearch as embedded database
+Please not, that you need to start play with more memory, if you want to use elasticsearch as embedded database.
 
 ```
 activator -J-Xmx2048m run
