@@ -12,11 +12,11 @@ So here we go, i created this plugin :)
 
 ## Current Version
 
-**0.3.0**
+**0.4.0**
 
-* kickstart the project
-* bugfixes
-* enhanced plugin to handle custom configurations
+* HUGE UPGRADES !
+* spring-data-elasticsearch 1.4.0.BUILD-SNAPSHOT (is still snapshot, but works perfectly :))
+* elasticsearch 2.2.0
 
 ## Installation (using sbt)
 
