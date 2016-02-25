@@ -4,7 +4,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,10 +25,10 @@ public class RemoteElasticConfiguration extends ElasticBaseConfiguration {
 
   {
     Config config = ConfigFactory.load();
-    ImmutableSettings.Builder builder = ImmutableSettings.settingsBuilder();
+    Settings.Builder builder = Settings.settingsBuilder();
     builder = addStringIfPresent(builder, config, "cluster.name", "elastic.clusterName");
 
-    client = new TransportClient(builder.build());
+    client = TransportClient.builder().settings(builder).build();
     try {
       client.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(config.getString("elastic.remoteHost")), config.getInt("elastic.remotePort")));
     } catch (Exception o_O) {

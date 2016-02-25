@@ -3,7 +3,7 @@ package elasticplugin.configuration;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.node.Node;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class EmbeddedElasticConfig extends ElasticBaseConfiguration {
 
   {
     Config config = ConfigFactory.load();
-    ImmutableSettings.Builder builder = ImmutableSettings.settingsBuilder();
+    Settings.Builder builder = Settings.settingsBuilder();
     builder = addStringIfPresent(builder, config, "path.home", "elastic.embeddedTarget");
     builder = addStringIfPresent(builder, config, "cluster.name", "elastic.clusterName");
     builder = addIntegerIfPresent(builder, config, "http.port", "elastic.httpPort");
