@@ -31,7 +31,7 @@ resolvers += "Spring milestones" at "http://repo.spring.io/milestone"
 Add a dependency on the following artifact:
 
 ```scala
-libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.3.0"
+libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.4.0"
 
 ```
 
