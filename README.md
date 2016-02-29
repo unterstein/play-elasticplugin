@@ -12,11 +12,9 @@ So here we go, i created this plugin :)
 
 ## Current Version
 
-**0.4.0**
+**0.5.0**
 
-* HUGE UPGRADES !
-* spring-data-elasticsearch 1.4.0.BUILD-SNAPSHOT (is still snapshot, but works perfectly :))
-* elasticsearch 2.2.0
+* Introduced play module to initialize play-elasticplugin, thanks @raunak
 
 ## Installation (using sbt)
 
@@ -31,7 +29,7 @@ resolvers += "Spring milestones" at "http://repo.spring.io/milestone"
 Add a dependency on the following artifact:
 
 ```scala
-libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.4.0"
+libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.5.0"
 
 ```
 
@@ -112,6 +110,8 @@ Take a look into the examples
 
 
 ## Old Versions
+
+0.4.0 spring-data-elasticsearch 1.4.0.BUILD-SNAPSHOT (is still snapshot, but works perfectly :)) and elasticsearch 2.2.0
 
 0.3.0 enhanced plugin to handle custom configurations
 
