@@ -12,11 +12,9 @@ So here we go, i created this plugin :)
 
 ## Current Version
 
-**0.4.0**
+**0.6.0**
 
-* HUGE UPGRADES !
-* spring-data-elasticsearch 1.4.0.BUILD-SNAPSHOT (is still snapshot, but works perfectly :))
-* elasticsearch 2.2.0
+* Fixed bug in RemoteElasticConfiguration, thanks @raunak again :-)
 
 ## Installation (using sbt)
 
@@ -31,7 +29,7 @@ resolvers += "Spring milestones" at "http://repo.spring.io/milestone"
 Add a dependency on the following artifact:
 
 ```scala
-libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.4.0"
+libraryDependencies += "com.github.unterstein" %% "play-elasticplugin" % "0.5.0"
 
 ```
 
@@ -41,6 +39,9 @@ Settings for the plugin go into the `conf/application.conf`:
 elastic.serviceProviderClass="elastic.services.ElasticServiceProvider" # the provider class which holds the annotated elasticsearch beans
 
 elastic.mode="embedded" # mode to run embedded or remote
+
+# activate module
+play.modules.enabled += "elasticplugin.ElasticModule"
 ```
 
 # embedded elastic config
@@ -109,6 +110,10 @@ Take a look into the examples
 
 
 ## Old Versions
+
+0.5.0 Introduced play module to initialize play-elasticplugin, thanks @raunak
+
+0.4.0 spring-data-elasticsearch 1.4.0.BUILD-SNAPSHOT (is still snapshot, but works perfectly :)) and elasticsearch 2.2.0
 
 0.3.0 enhanced plugin to handle custom configurations
 
