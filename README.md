@@ -41,6 +41,9 @@ Settings for the plugin go into the `conf/application.conf`:
 elastic.serviceProviderClass="elastic.services.ElasticServiceProvider" # the provider class which holds the annotated elasticsearch beans
 
 elastic.mode="embedded" # mode to run embedded or remote
+
+# activate module
+play.modules.enabled += "elasticplugin.ElasticModule"
 ```
 
 # embedded elastic config

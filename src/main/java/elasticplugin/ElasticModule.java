@@ -1,7 +1,6 @@
-package modules;
+package elasticplugin;
 
 import com.google.inject.AbstractModule;
-import elasticplugin.ElasticPlugin;
 
 public class ElasticModule extends AbstractModule {
 
