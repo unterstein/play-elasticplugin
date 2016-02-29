@@ -18,9 +18,6 @@ import java.util.List;
  */
 public class JavaController extends Controller {
 
-  @Inject
-  ElasticPlugin elasticPlugin;
-
   public Result index() {
 
     final WorldRepository worldRepository = ElasticServiceProviderImpl.get().worldRepository;

@@ -2,14 +2,14 @@ package elasticplugin;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.typesafe.config.ConfigFactory;
 import elasticplugin.configuration.EmbeddedElasticConfig;
 import elasticplugin.configuration.RemoteElasticConfiguration;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
+import play.Configuration;
+import play.Environment;
 import play.Logger;
-import play.api.Play;
 import play.inject.ApplicationLifecycle;
 import play.libs.F;
 
@@ -34,8 +34,15 @@ public class ElasticPlugin {
 
   private static Class<?> serviceProviderClass = null;
 
+  private final Environment environment;
+
+  private final Configuration configuration;
+
   @Inject
-  public ElasticPlugin(ApplicationLifecycle applicationLifecycle) {
+  public ElasticPlugin(Environment environment, Configuration configuration, ApplicationLifecycle applicationLifecycle) {
+
+    this.environment = environment;
+    this.configuration = configuration;
 
     initialize();
 
@@ -69,14 +76,14 @@ public class ElasticPlugin {
 
     springContext = new AnnotationConfigApplicationContext();
 
-    String serviceProviderClassName = ConfigFactory.load().getString(SERVICE_PROVIDER_NAME_CFG);
+    String serviceProviderClassName = configuration.getString(SERVICE_PROVIDER_NAME_CFG);
     if (StringUtils.isEmpty(serviceProviderClassName) == true) {
       if (LOGGER.isErrorEnabled()) {
         LOGGER.error("No configuration for the elastic ServiceProvider found: " + SERVICE_PROVIDER_NAME_CFG + " must be" + " set for this plugin.");
       }
       return;
     }
-    final ClassLoader classLoader = Play.classloader(Play.current());
+    final ClassLoader classLoader = environment.classLoader();
     try {
       serviceProviderClass = Class.forName(serviceProviderClassName, false, classLoader);
       Annotation annotation = serviceProviderClass.getAnnotation(Component.class);
@@ -95,7 +102,7 @@ public class ElasticPlugin {
     }
 
 
-    final String mode = ConfigFactory.load().getString("elastic.mode");
+    final String mode = configuration.getString("elastic.mode");
 
     if (mode.equals("embedded")) {
       if (LOGGER.isDebugEnabled() == true) {
@@ -115,7 +122,7 @@ public class ElasticPlugin {
       if(LOGGER.isDebugEnabled() == true) {
         LOGGER.debug("Loading own configuration");
       }
-      String configurationClassName = ConfigFactory.load().getString("elastic.ownConfigurationClass");
+      String configurationClassName = configuration.getString("elastic.ownConfigurationClass");
       if (StringUtils.isEmpty(configurationClassName) == true) {
         if (LOGGER.isErrorEnabled()) {
           LOGGER.error("if you use elastic.mode = own, you must provide a configuration class elastic.ownConfigurationClass");

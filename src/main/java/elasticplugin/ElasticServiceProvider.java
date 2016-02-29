@@ -27,5 +27,5 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 public class ElasticServiceProvider {
 
   @Autowired
-  ElasticsearchTemplate template;
+  public ElasticsearchTemplate template;
 }
