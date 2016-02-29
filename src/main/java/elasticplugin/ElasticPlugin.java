@@ -1,7 +1,6 @@
 package elasticplugin;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+
 import elasticplugin.configuration.EmbeddedElasticConfig;
 import elasticplugin.configuration.RemoteElasticConfiguration;
 import org.apache.commons.lang.StringUtils;
@@ -13,6 +12,8 @@ import play.Logger;
 import play.inject.ApplicationLifecycle;
 import play.libs.F;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.lang.annotation.Annotation;
 
 /**

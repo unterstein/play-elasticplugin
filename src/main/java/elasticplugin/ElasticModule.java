@@ -1,11 +1,18 @@
 package elasticplugin;
 
-import com.google.inject.AbstractModule;
+import play.api.Configuration;
+import play.api.Environment;
+import play.api.inject.Binding;
+import play.api.inject.Module;
+import scala.collection.Seq;
 
-public class ElasticModule extends AbstractModule {
+public class ElasticModule extends Module {
 
     @Override
-    protected void configure() {
-        bind(ElasticPlugin.class).asEagerSingleton();
+    public Seq<Binding<?>> bindings(Environment environment, Configuration configuration) {
+        return seq(
+                bind(ElasticPlugin.class).toSelf().eagerly()
+        );
     }
+
 }
