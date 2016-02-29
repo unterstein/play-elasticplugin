@@ -1,6 +1,6 @@
 name := "play-elasticplugin"
 
-version := "0.6.0"
+version := "0.7.0-SNAPSHOT"
 
 organization := "com.github.unterstein"
 

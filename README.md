@@ -12,9 +12,9 @@ So here we go, i created this plugin :)
 
 ## Current Version
 
-**0.5.0**
+**0.6.0**
 
-* Introduced play module to initialize play-elasticplugin, thanks @raunak
+* Fixed bug in RemoteElasticConfiguration, thanks @raunak again :-)
 
 ## Installation (using sbt)
 
@@ -110,6 +110,8 @@ Take a look into the examples
 
 
 ## Old Versions
+
+0.5.0 Introduced play module to initialize play-elasticplugin, thanks @raunak
 
 0.4.0 spring-data-elasticsearch 1.4.0.BUILD-SNAPSHOT (is still snapshot, but works perfectly :)) and elasticsearch 2.2.0
 
