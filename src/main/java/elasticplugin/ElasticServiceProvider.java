@@ -1,7 +1,8 @@
 package elasticplugin;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+
+import javax.inject.Inject;
 
 /**
  * This is the main class of the ElasticServiceProvider. This must be overwritten by you and can than hold some spring
@@ -26,6 +27,6 @@ import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
  */
 public class ElasticServiceProvider {
 
-  @Autowired
+  @Inject
   public ElasticsearchTemplate template;
 }
