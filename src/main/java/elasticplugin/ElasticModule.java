@@ -8,11 +8,11 @@ import scala.collection.Seq;
 
 public class ElasticModule extends Module {
 
-    @Override
-    public Seq<Binding<?>> bindings(Environment environment, Configuration configuration) {
-        return seq(
-                bind(ElasticPlugin.class).toSelf().eagerly()
-        );
-    }
+  @Override
+  public Seq<Binding<?>> bindings(Environment environment, Configuration configuration) {
+    return seq(
+        bind(ElasticPlugin.class).toSelf().eagerly()
+    );
+  }
 
 }
