@@ -15,8 +15,8 @@ resolvers ++= Seq(
 scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play" % "2.4.6",
-  "com.typesafe.play" %% "play-java" % "2.4.6",
+  "com.typesafe.play" %% "play" % "2.5.0",
+  "com.typesafe.play" %% "play-java" % "2.5.0",
 
   // spring data stuff
   "org.springframework.data" % "spring-data-elasticsearch" % "1.4.0.BUILD-SNAPSHOT",
